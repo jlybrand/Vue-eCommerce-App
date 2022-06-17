@@ -29,7 +29,10 @@
             >
           </li>
           <li class="nav-item">
-            <a @click="toggleModal" class="btn btn-outline-succes">Log In</a>
+            <a @click="toggleLogin" class="btn btn-outline-succes">Log In</a>
+          </li>
+           <li class="nav-item">
+            <a @click="toggleSignup" class="btn btn-outline-succes">Sign Up</a>
           </li>
         </ul>
         <form class="d-flex" role="search">
@@ -44,11 +47,13 @@
       </div>
     </div>
   </nav>
-  <Login @close="toggleModal" :modalActive="modalActive"></Login>
+  <Login @close="toggleLogin" :loginActive="loginActive"></Login>
+  <Signup  @close="toggleSignup" :signupActive="signupActive"></Signup>
 </template>
 
 <script>
 import Login from "./Login.vue";
+import Signup from "./Signup.vue";
 import { ref } from "vue";
 
 export default {
@@ -58,15 +63,21 @@ export default {
   },
   components: {
     Login,
+    Signup
   },
 
   setup() {
-    const modalActive = ref(false);
-    const toggleModal = () => {
-      modalActive.value = !modalActive.value;
+    const loginActive = ref(false);
+    const signupActive = ref(false);
+    const toggleLogin = () => {
+      loginActive.value = !loginActive.value;
     };
-    return { modalActive, toggleModal };
+    const toggleSignup = () => {
+      signupActive.value = !signupActive.value;
+    };
+    return { loginActive, toggleLogin, signupActive, toggleSignup  };
   },
+  
 };
 </script>
 

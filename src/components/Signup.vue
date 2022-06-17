@@ -1,33 +1,43 @@
 <template>
   <transition name="modal-animation">
-    <div v-show="loginActive" class="modal">
+    <div v-show="signupActive" class="modal">
       <transition name="modal-animation-inner">
-        <div v-show="loginActive" class="modal-inner">
-          <button @click="close" type="button" class="btn btn-light">X</button>
+        <div v-show="signupActive" class="modal-inner">
+          <button @click="close" type="button" class="btn btn-light cancel-btn">X</button>
           <div class="modal-body">
             <div class="tab-content" id="pills-tabContent">
               <form>
-                <h5 class="text-center">Log In</h5>
+                <h5 class="text-center">Create New Account</h5>
 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email</label>
+                  <label for="name">Your name</label>
+                  <input
+                    type="text"
+                    v-model="name"
+                    class="form-control"
+                    id="name"
+                    placeholder="Your nice name"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email address</label>
                   <input
                     type="email"
                     v-model="email"
                     class="form-control"
-                    id="exampleInputEmail1"
+                    id="email"
                     aria-describedby="emailHelp"
                     placeholder="Enter email"
                   />
                 </div>
                 <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
+                  <label for="password">Password</label>
                   <input
                     type="password"
-                    @keyup.enter="login"
                     v-model="password"
                     class="form-control"
-                    id="exampleInputPassword1"
+                    id="password"
                     placeholder="Password"
                   />
                 </div>
@@ -42,14 +52,19 @@
                       class="nav-link active"
                       id="pills-home-tab"
                       data-toggle="pill"
-                      href="#pills-login"
+                      href="#pills-signup"
                       role="tab"
-                      aria-controls="pills-login"
+                      aria-controls="pills-signup"
                       aria-selected="true"
-                      >Login</a
+                      >Register</a
                     >
                   </li>
                 </ul>
+                <!-- <div class="form-group">
+                  <button class="nav-link active btn btn-primary" @click="register">
+                    Signup
+                  </button>
+                </div> -->
               </form>
             </div>
           </div>
@@ -61,7 +76,7 @@
 
 <script>
 export default {
-  name: "LoginModal",
+  name: "SignupModal",
   data() {
     return {
       name: null,
@@ -69,7 +84,7 @@ export default {
       password: null,
     };
   },
-  props: ["loginActive"],
+  props: ["signupActive"],
   setup(props, { emit }) {
     const close = () => {
       emit("close");
@@ -129,7 +144,7 @@ export default {
   padding: 50px 16px;
 }
 
-button {
+.cancel-btn {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -137,7 +152,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.cancel-btn:hover {
   color: crimson;
 }
 
@@ -149,5 +164,9 @@ button:hover {
 
 .form-control {
   margin-bottom: 20px;
+}
+
+#pills-tab {
+  margin-top: 30px;
 }
 </style>
